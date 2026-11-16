@@ -1,0 +1,133 @@
+{
+  "session_id": "69404b5d-aee8-47b5-881b-c4f113fc39f9",
+  "created_at": "2026-11-16T17:27:12.991347+00:00",
+  "updated_at": "2026-11-16T17:27:22.658240+00:00",
+  "phase": "completed",
+  "language": "en",
+  "draft": {
+    "order_number": "ORD-48291",
+    "problem_category": "damaged_item",
+    "problem_description": "The espresso machine’s water tank arrived cracked.",
+    "urgency_level": "high",
+    "field_errors": {}
+  },
+  "validated_ticket": {
+    "ticket_id": "TKT-FBD2469D",
+    "order_number": "ORD-48291",
+    "problem_category": "damaged_item",
+    "problem_description": "The espresso machine’s water tank arrived cracked.",
+    "urgency_level": "high",
+    "order_info": {
+      "order_number": "ORD-48291",
+      "item_summary": "Barista Pro Espresso Machine",
+      "shipping_status": "delivered",
+      "delivered_days_ago": 2
+    }
+  },
+  "escalation_reason": null,
+  "invalid_order_attempts": 0,
+  "summary": {
+    "summary": "The customer reported that the Barista Pro Espresso Machine from order ORD-48291 arrived with a cracked water tank and requested high urgency. The ticket was submitted successfully, with a free express replacement expected to ship within 48 hours of ticket creation without waiting for the damaged item’s return.",
+    "key_points": [
+      "Order ORD-48291, Barista Pro Espresso Machine, was delivered two days ago.",
+      "Issue: the espresso machine’s water tank arrived cracked; category recorded as damaged item.",
+      "Customer requested and confirmed high urgency.",
+      "Policy guidance: NovaMart ships a free express replacement within 48 hours, and the damaged unit does not need to reach the warehouse first.",
+      "Ticket TKT-FBD2469D was created successfully and submitted for follow-up."
+    ],
+    "outcome": "completed",
+    "escalation_reason": null,
+    "generated_by": "llm"
+  },
+  "turns": [
+    {
+      "turn_id": "t0",
+      "client_turn_id": null,
+      "payload_sha256": null,
+      "created_at": "2026-11-16T17:27:12.991347+00:00",
+      "user_text": null,
+      "reply_text": "Hi, welcome to NovaMart support. Share your order number and tell me how I can help.",
+      "language": "en",
+      "frustration_score": null,
+      "cited_kb_ids": [],
+      "retrieved_chunks": [],
+      "metrics": {
+        "stt_ms": null,
+        "rag_ms": 0.0,
+        "llm_ms": 0.0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "error_note": null
+    },
+    {
+      "turn_id": "t1",
+      "client_turn_id": "demo-1",
+      "payload_sha256": "4569192df3f367561ab1efe7ac7ee27d8b8f861b8ac8efcd8de8513b34846339",
+      "created_at": "2026-11-16T17:27:15.705539+00:00",
+      "user_text": "Hi, my espresso machine from order ORD-48291 arrived with a cracked water tank. What is your replacement SLA for damaged items?",
+      "reply_text": "When an item arrives cracked, leaking, or broken, NovaMart ships a free express replacement within 48 hours of ticket creation. Customers do not need to wait for the damaged unit to reach the warehouse before the replacement ships. Thanks for letting me know. I’ve noted the order and the damaged espresso machine; how urgent is this for you?",
+      "language": "en",
+      "frustration_score": 10,
+      "cited_kb_ids": [
+        "damaged_or_wrong_item#damaged-item-replacement-sla"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "damaged_or_wrong_item#damaged-item-replacement-sla",
+          "title": "Damaged item replacement SLA",
+          "content": "When an item arrives cracked, leaking, or broken, NovaMart ships a free express replacement within 48 hours of ticket creation. Customers do not need to wait for the damaged unit to reach the warehouse before the replacement ships.",
+          "score": 0.6361
+        }
+      ],
+      "metrics": {
+        "stt_ms": null,
+        "rag_ms": 226.0,
+        "llm_ms": 2487.4,
+        "input_tokens": 1027,
+        "output_tokens": 170
+      },
+      "error_note": null
+    },
+    {
+      "turn_id": "t2",
+      "client_turn_id": "demo-2",
+      "payload_sha256": "e79b73c0a6e39eacd01bb1b67895fce3b7f156140ec4f2f4c84ecb4fbeaab46f",
+      "created_at": "2026-11-16T17:27:17.784897+00:00",
+      "user_text": "Please mark it high urgency.",
+      "reply_text": "Let me confirm the details for order ORD-48291 (Barista Pro Espresso Machine). Category is damaged item, urgency is high, and the issue is: The espresso machine’s water tank arrived cracked. Say yes to submit this ticket, or tell me what to change.",
+      "language": "en",
+      "frustration_score": 0,
+      "cited_kb_ids": [],
+      "retrieved_chunks": [],
+      "metrics": {
+        "stt_ms": null,
+        "rag_ms": 225.5,
+        "llm_ms": 1851.8,
+        "input_tokens": 1068,
+        "output_tokens": 86
+      },
+      "error_note": null
+    },
+    {
+      "turn_id": "t3",
+      "client_turn_id": "demo-3",
+      "payload_sha256": "e889a91cb4881545c288ba6498aed2f7fd3abd2dc832f9705b689f8243c200b2",
+      "created_at": "2026-11-16T17:27:20.128990+00:00",
+      "user_text": "Yes, everything looks right, submit the ticket.",
+      "reply_text": "All set. I created ticket TKT-FBD2469D for order ORD-48291. Our support team will follow up according to its urgency.",
+      "language": "en",
+      "frustration_score": 0,
+      "cited_kb_ids": [],
+      "retrieved_chunks": [],
+      "metrics": {
+        "stt_ms": null,
+        "rag_ms": 244.8,
+        "llm_ms": 2098.2,
+        "input_tokens": 1136,
+        "output_tokens": 90
+      },
+      "error_note": null
+    }
+  ]
+}

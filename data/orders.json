@@ -1,0 +1,32 @@
+[
+  {
+    "order_number": "ORD-48291",
+    "item_summary": "Barista Pro Espresso Machine",
+    "shipping_status": "delivered",
+    "delivered_days_ago": 2
+  },
+  {
+    "order_number": "ORD-51904",
+    "item_summary": "AeroLight Running Shoes (EU 42)",
+    "shipping_status": "in_transit_delayed",
+    "delivered_days_ago": null
+  },
+  {
+    "order_number": "ORD-60372",
+    "item_summary": "Nordic Oak Standing Desk",
+    "shipping_status": "delivered",
+    "delivered_days_ago": 14
+  },
+  {
+    "order_number": "ORD-77418",
+    "item_summary": "NoiseGuard Wireless Headphones",
+    "shipping_status": "delivered",
+    "delivered_days_ago": 45
+  },
+  {
+    "order_number": "ORD-93015",
+    "item_summary": "NovaCare Annual Membership",
+    "shipping_status": "digital_active",
+    "delivered_days_ago": 5
+  }
+]
