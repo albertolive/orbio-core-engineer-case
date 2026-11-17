@@ -44,7 +44,7 @@ cp .env.example .env
 uv run uvicorn support_agent.api:app --reload --port 8000
 ```
 
-Open `http://127.0.0.1:8000` in Chrome or Safari. Hold `Space` or click the microphone button to speak, or type in the message box. The right-hand inspector shows live slot state, frustration score, retrieved RAG chunks, turn latencies, and the persisted JSON payload.
+Open `http://127.0.0.1:8000` in Chrome. The left panel is the conversation with Nova. Hold `Space` or click the microphone button to speak, or type in the message box. The right panel is the specialist console. It shows the ticket draft, the handoff and summary, the frustration score, the retrieved RAG sources with their cosine scores, turn latencies, and the persisted JSON payload. The built UI is committed in `src/support_agent/static/`, so running the app needs no Node.
 
 ### Run checks and tests
 
@@ -60,10 +60,20 @@ uv run ruff check .
 uv run mypy src tests
 ```
 
+Changing the UI needs Node 22.13 or newer. The build writes into `src/support_agent/static/`, so commit that folder with the source.
+
+```bash
+cd frontend
+npm install
+npm run build   # tsc --noEmit, then vite build
+npm test        # Vitest, offline
+npm run lint
+```
+
 ## System architecture
 
 ```text
-Browser UI (MediaRecorder + Blob audio cache + live JSON inspector)
+Browser UI (React: MediaRecorder + WebAudio + Blob audio cache + specialist console)
    │
    ├── POST /api/sessions/{id}/voice ──► ASGI byte-limit + MIME guard ──► gpt-transcribe (STT)
    ├── POST /api/sessions/{id}/turn  ───────────────────────────────────┐      │
@@ -88,6 +98,7 @@ Browser UI (MediaRecorder + Blob audio cache + live JSON inspector)
 | `src/support_agent/providers.py` | Plain async functions calling OpenAI Responses (`store=False`, `reasoning={"effort": "none"}`), `text-embedding-3-small`, `gpt-transcribe`, and ElevenLabs `/v1/text-to-dialogue/stream`. |
 | `src/support_agent/engine.py` | Orchestrates voice and text turns, error recovery, terminal summarization, and structured JSON turn logs. |
 | `src/support_agent/api.py` | `Settings` validation, ASGI upload-size limit middleware, FastAPI `lifespan`, exception handlers (`404`, `409`, `413`, `415`, `422`, `503`), and static UI serving. |
+| `frontend/` | Vite, React, TypeScript, Tailwind v4 and shadcn/ui source for the browser UI. `npm run build` writes the bundle into `src/support_agent/static/`. Design notes are in [`frontend/DESIGN.md`](frontend/DESIGN.md). |
 
 ## Key design decisions
 
@@ -96,6 +107,8 @@ Browser UI (MediaRecorder + Blob audio cache + live JSON inspector)
 - **Pre-STT byte-hash idempotency.** Voice turns enforce an ASGI streaming byte cap before multipart disk spooling and hash raw audio bytes under the session lock before calling `gpt-transcribe`. Network retries replay the saved session without paying for STT twice.
 - **Decoupled `GET .../audio` synthesis.** Serving TTS on a separate GET route returns the updated JSON state without waiting on ElevenLabs synthesis and avoids lost-update races on the session file. The browser deduplicates concurrent fetches into a session-scoped `Blob` URL map (`Cache-Control: private, max-age=3600`), so replays stay local without issuing extra HTTP requests.
 - **Non-identifying catalog and `store=False` on Responses.** [`data/orders.json`](data/orders.json) contains only item summaries and shipping states, uses one uniform error message for malformed or unknown codes, and sets `store=False` on OpenAI Responses calls so prompt and turn outputs are not stored in OpenAI response logs.
+- **One command at review time.** The React build is committed under `src/support_agent/static/`. `api.py` serves `index.html` at `/` and the hashed bundle at `/assets` with one `StaticFiles` mount, so `uv run uvicorn` stays the only command and reviewers run no Node.
+- **The browser never shows a stale answer.** Each response checks that its `session_id` is still the open session before it touches the screen. The audio cache is keyed by session and turn, and a retry after a network failure reuses the same `client_turn_id`.
 
 ## Production improvements
 
