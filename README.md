@@ -6,7 +6,7 @@ Built with Python 3.12, FastAPI, Pydantic v2, OpenAI (`gpt-5.6-luna`, `text-embe
 
 ## Demo video
 
-- **Walkthrough video:** `TODO: paste Loom or screen-recording URL before sending`
+- **Walkthrough video:** [`docs/walkthrough.mp4`](docs/walkthrough.mp4?raw=true) (7 min 34 s, 20 MB)
 - **Sample persisted output:** [`examples/sample_completed_session.json`](examples/sample_completed_session.json)
 
 ## Capabilities
