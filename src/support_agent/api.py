@@ -235,6 +235,10 @@ def create_app(
             raise HTTPException(status_code=404, detail="UI bundle missing")
         return FileResponse(STATIC_INDEX, media_type="text/html")
 
+    from fastapi.staticfiles import StaticFiles
+
+    app.mount("/assets", StaticFiles(directory=STATIC_INDEX.parent / "assets", check_dir=False))
+
     @app.get("/api/health")
     async def health(request: Request) -> dict[str, object]:
         eng = _get_engine(request)
